@@ -1,7 +1,6 @@
 import unittest
 import os
 
-from fitz import version
 from pyvirtualdisplay import Display
 import undetected_chromedriver as uc
 from django.test.testcases import TransactionTestCase
@@ -24,7 +23,7 @@ class TestChromeDriver(TransactionTestCase):
             options.add_argument("--disable-dev-shm-usage")
 
             # Initialize Chrome driver
-            driver = uc.Chrome(use_subprocess=True, options=option, version=uc.VERSION)
+            driver = uc.Chrome(use_subprocess=True, options=option, version=1.33)
 
             try:
                 # Load Google
