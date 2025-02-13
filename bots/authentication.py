@@ -1,8 +1,9 @@
-from rest_framework import authentication
-from rest_framework import exceptions
 import hashlib
+
+from rest_framework import authentication, exceptions
+
 from .models import ApiKey
-from django.utils import timezone
+
 
 class ApiKeyAuthentication(authentication.BaseAuthentication):
     def authenticate_header(self, request):

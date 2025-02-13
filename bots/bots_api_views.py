@@ -1,16 +1,42 @@
-from django.shortcuts import render, get_object_or_404
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import Bot, BotEventTypes, BotEventManager, Recording, RecordingTypes, TranscriptionTypes, TranscriptionProviders, Utterance, MediaBlob, BotMediaRequest, BotMediaRequestMediaTypes, Credentials, BotStates
-from .serializers import CreateBotSerializer, BotSerializer, TranscriptUtteranceSerializer, RecordingSerializer, SpeechSerializer
-from .authentication import ApiKeyAuthentication
-from .tasks import run_bot
-import redis
 import json
 import os
-from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiParameter, OpenApiExample
+
+import redis
 from django.urls import reverse
+from drf_spectacular.utils import (
+    OpenApiExample,
+    OpenApiParameter,
+    OpenApiResponse,
+    extend_schema,
+)
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .authentication import ApiKeyAuthentication
+from .models import (
+    Bot,
+    BotEventManager,
+    BotEventTypes,
+    BotMediaRequest,
+    BotMediaRequestMediaTypes,
+    BotStates,
+    Credentials,
+    MediaBlob,
+    Recording,
+    RecordingTypes,
+    TranscriptionProviders,
+    TranscriptionTypes,
+    Utterance,
+)
+from .serializers import (
+    BotSerializer,
+    CreateBotSerializer,
+    RecordingSerializer,
+    SpeechSerializer,
+    TranscriptUtteranceSerializer,
+)
+from .tasks import run_bot
 
 TokenHeaderParameter = [
     OpenApiParameter(

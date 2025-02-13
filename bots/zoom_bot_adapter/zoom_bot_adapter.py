@@ -1,17 +1,20 @@
-import zoom_meeting_sdk as zoom
-import jwt
-from datetime import datetime, timedelta
-import numpy as np
-import cv2
-from .video_input_manager import VideoInputManager
-from urllib.parse import urlparse, parse_qs
 import re
+from datetime import datetime, timedelta
+from urllib.parse import parse_qs, urlparse
+
+import cv2
+import gi
+import jwt
+import numpy as np
+import zoom_meeting_sdk as zoom
 
 from bots.bot_adapter import BotAdapter
 
-import gi
+from .video_input_manager import VideoInputManager
+
 gi.require_version('GLib', '2.0')
 from gi.repository import GLib
+
 
 def generate_jwt(client_id, client_secret):
     iat = datetime.utcnow()

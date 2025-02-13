@@ -1,6 +1,7 @@
 from cryptography.fernet import Fernet
 from django.core.management.utils import get_random_secret_key
 
+
 def generate_encryption_key():
     return Fernet.generate_key().decode('utf-8')
 
@@ -13,9 +14,9 @@ def main():
     
     print(f'CREDENTIALS_ENCRYPTION_KEY={credentials_key}')
     print(f'DJANGO_SECRET_KEY={django_key}')
-    print(f'AWS_RECORDING_STORAGE_BUCKET_NAME=')
-    print(f'AWS_ACCESS_KEY_ID=')
-    print(f'AWS_SECRET_ACCESS_KEY=')
+    print('AWS_RECORDING_STORAGE_BUCKET_NAME=')
+    print('AWS_ACCESS_KEY_ID=')
+    print('AWS_SECRET_ACCESS_KEY=')
 
 if __name__ == '__main__':
     main()

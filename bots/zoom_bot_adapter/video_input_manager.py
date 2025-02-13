@@ -1,9 +1,10 @@
-import zoom_meeting_sdk as zoom
-import numpy as np
-import cv2
-from gi.repository import GLib
-import time
 import logging
+import time
+
+import cv2
+import numpy as np
+import zoom_meeting_sdk as zoom
+from gi.repository import GLib
 
 logger = logging.getLogger(__name__)
 

@@ -1,7 +1,10 @@
-import time
 import threading
-from .text_to_speech import generate_audio_from_text
+import time
+
 from bots.utils import mp3_to_pcm
+
+from .text_to_speech import generate_audio_from_text
+
 
 class AudioOutputManager:
     SAMPLE_RATE = 44100

@@ -1,8 +1,11 @@
-from pydub import AudioSegment
 import io
+
 import cv2
 import numpy as np
+from pydub import AudioSegment
+
 from .models import RecordingStates
+
 
 def pcm_to_mp3(pcm_data: bytes, sample_rate: int = 32000, channels: int = 1, sample_width: int = 2, bitrate: str = "128k") -> bytes:
     """

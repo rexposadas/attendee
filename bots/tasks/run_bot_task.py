@@ -1,9 +1,12 @@
-from celery import shared_task
-from bots.models import *
 import os
 import signal
+
+from celery import shared_task
 from celery.signals import worker_shutting_down
+
 from bots.bot_controller import BotController
+from bots.models import *
+
 
 @shared_task(bind=True, soft_time_limit=3600)
 def run_bot(self, bot_id):

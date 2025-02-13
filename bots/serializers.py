@@ -1,7 +1,20 @@
-from rest_framework import serializers
-from drf_spectacular.utils import extend_schema_field, extend_schema_serializer, OpenApiExample
-from .models import Bot, BotEventTypes, BotEventSubTypes, BotStates, Recording, RecordingStates, RecordingTranscriptionStates
 import jsonschema
+from drf_spectacular.utils import (
+    OpenApiExample,
+    extend_schema_field,
+    extend_schema_serializer,
+)
+from rest_framework import serializers
+
+from .models import (
+    Bot,
+    BotEventSubTypes,
+    BotEventTypes,
+    BotStates,
+    Recording,
+    RecordingStates,
+    RecordingTranscriptionStates,
+)
 
 
 @extend_schema_field({

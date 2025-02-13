@@ -1,7 +1,10 @@
 import gi
+
 gi.require_version('Gst', '1.0')
-from gi.repository import Gst, GLib
 import time
+
+from gi.repository import GLib, Gst
+
 
 class GstreamerPipeline:
     AUDIO_FORMAT_PCM = 'audio/x-raw,format=S16LE,channels=1,rate=32000,layout=interleaved'
@@ -144,7 +147,7 @@ class GstreamerPipeline:
             print(f"GStreamer Error: {err}, Debug: {debug}, src_name: {src_name}")
 
         elif t == Gst.MessageType.EOS:
-            print(f"GStreamer pipeline reached end of stream")
+            print("GStreamer pipeline reached end of stream")
 
     def monitor_pipeline_stats(self):
         """Periodically print pipeline statistics"""

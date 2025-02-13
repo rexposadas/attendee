@@ -1,17 +1,19 @@
-from unittest.mock import patch, MagicMock, call
-from bots.models import *
+import base64
+import json
 import os
 import threading
 import time
+from unittest.mock import MagicMock, call, patch
+
 from django.db import connection
-from bots.bot_controller import BotController
 from django.test.testcases import TransactionTestCase
+
+from bots.bot_controller import BotController
 from bots.bot_controller.streaming_uploader import StreamingUploader
 from bots.bots_api_views import send_sync_command
-import base64
+from bots.models import *
 from bots.utils import mp3_to_pcm, png_to_yuv420_frame
-import json
-from bots.bot_controller.gstreamer_pipeline import GstreamerPipeline
+
 
 def create_mock_streaming_uploader():
     mock_streaming_uploader = MagicMock(spec=StreamingUploader)

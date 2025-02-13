@@ -1,6 +1,9 @@
-from google.cloud import texttospeech
-from bots.models import Credentials
 import json
+
+from google.cloud import texttospeech
+
+from bots.models import Credentials
+
 
 def generate_audio_from_text(bot, text, settings, sample_rate):
     """

@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import projects_views
 
 app_name = 'bots'

@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Dict, Optional
 
+
 class CaptionEntry:
     def __init__(self, caption_data: dict):
         self.caption_data = caption_data

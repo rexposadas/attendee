@@ -1,8 +1,9 @@
-import unittest
 import os
-from pyvirtualdisplay import Display
+
 import undetected_chromedriver as uc
 from django.test.testcases import TransactionTestCase
+from pyvirtualdisplay import Display
+
 
 class TestChromeDriver(TransactionTestCase):
     def test_can_open_google(self):
