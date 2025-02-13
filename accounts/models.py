@@ -1,6 +1,9 @@
+import uuid
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-import uuid
+
+
 class Organization(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -23,6 +26,8 @@ class User(AbstractUser):
 # Only added this to create an org for the admin user
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+
+
 @receiver(pre_save, sender=User)
 def create_default_organization(sender, instance, **kwargs):
     # Only run this for new users (not updates)

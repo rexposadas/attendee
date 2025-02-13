@@ -1,19 +1,19 @@
-from django.db import models
-from django.utils.crypto import get_random_string
 import hashlib
-from accounts.models import Organization
-import string
+import json
 import random
-from concurrency.fields import IntegerVersionField
-from django.db import transaction
-from django.core.exceptions import ValidationError
+import string
+
 from concurrency.exceptions import RecordModifiedError
-from django.db import models
-from django.db.models import Q
+from concurrency.fields import IntegerVersionField
 from cryptography.fernet import Fernet
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db import models, transaction
+from django.db.models import Q
 from django.utils import timezone
-import json
+from django.utils.crypto import get_random_string
+
+from accounts.models import Organization
 
 # Create your models here.
 
@@ -534,6 +534,7 @@ class TranscriptionProviders(models.IntegerChoices):
     DEEPGRAM = 1, 'Deepgram'
 
 from storages.backends.s3boto3 import S3Boto3Storage
+
 
 class RecordingStorage(S3Boto3Storage):
     bucket_name = settings.AWS_RECORDING_STORAGE_BUCKET_NAME

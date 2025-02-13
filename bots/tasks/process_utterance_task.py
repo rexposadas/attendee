@@ -1,6 +1,8 @@
 from celery import shared_task
-from bots.models import *
 from django.db import DatabaseError
+
+from bots.models import *
+
 
 def convert_utterance_audio_blob_to_mp3(utterance):
     from bots.utils import pcm_to_mp3
@@ -24,8 +26,8 @@ def process_utterance(self, utterance_id):
 
     from deepgram import (
         DeepgramClient,
-        PrerecordedOptions,
         FileSource,
+        PrerecordedOptions,
     )
 
     utterance = Utterance.objects.get(id=utterance_id)

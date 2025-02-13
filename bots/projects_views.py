@@ -1,11 +1,20 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Project, Bot, BotStates, Bot, Credentials, RecordingStates, Utterance
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View
-from django.http import HttpResponse
-from .models import ApiKey
 from django.db import models
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import View
+
+from .models import (
+    ApiKey,
+    Bot,
+    BotStates,
+    Credentials,
+    Project,
+    RecordingStates,
+    Utterance,
+)
 from .utils import generate_recordings_json_for_bot_detail_view
+
 
 class ProjectUrlContextMixin:
     def get_project_context(self, object_id, project):

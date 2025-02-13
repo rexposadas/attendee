@@ -1,7 +1,9 @@
 import queue
-import webrtcvad
 from datetime import datetime, timedelta
+
 import numpy as np
+import webrtcvad
+
 
 def calculate_normalized_rms(audio_bytes):
     samples = np.frombuffer(audio_bytes, dtype=np.int16)

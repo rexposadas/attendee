@@ -1,8 +1,10 @@
-import boto3
+import logging
 import threading
 from io import BytesIO
 from queue import Queue
-import logging
+
+import boto3
+
 
 class StreamingUploader:
     def __init__(self, bucket, key, chunk_size=5242880):  # 5MB chunks

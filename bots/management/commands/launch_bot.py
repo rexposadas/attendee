@@ -1,7 +1,19 @@
-from django.core.management.base import BaseCommand
-from bots.tasks import run_bot  # Import your task
-from bots.models import Bot, BotEventManager, Project, Recording, RecordingTypes, TranscriptionTypes, TranscriptionProviders, BotEventTypes
 import json
+
+from django.core.management.base import BaseCommand
+
+from bots.models import (
+    Bot,
+    BotEventManager,
+    BotEventTypes,
+    Project,
+    Recording,
+    RecordingTypes,
+    TranscriptionProviders,
+    TranscriptionTypes,
+)
+from bots.tasks import run_bot  # Import your task
+
 
 class Command(BaseCommand):
     help = 'Runs the celery task directly for debugging'

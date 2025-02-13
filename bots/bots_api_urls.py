@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import bots_api_views
 
 urlpatterns = [

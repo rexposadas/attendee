@@ -1,19 +1,23 @@
-from bots.models import *
-from .individual_audio_input_manager import IndividualAudioInputManager
-from .audio_output_manager import AudioOutputManager
-from .streaming_uploader import StreamingUploader
-from .closed_caption_manager import ClosedCaptionManager
 import os
 import signal
-import redis
-from bots.bot_adapter import BotAdapter
-from .gstreamer_pipeline import GstreamerPipeline
-from .rtmp_client import RTMPClient
-from django.core.files.base import ContentFile
 
 import gi
+import redis
+from django.core.files.base import ContentFile
+
+from bots.bot_adapter import BotAdapter
+from bots.models import *
+
+from .audio_output_manager import AudioOutputManager
+from .closed_caption_manager import ClosedCaptionManager
+from .gstreamer_pipeline import GstreamerPipeline
+from .individual_audio_input_manager import IndividualAudioInputManager
+from .rtmp_client import RTMPClient
+from .streaming_uploader import StreamingUploader
+
 gi.require_version('GLib', '2.0')
 from gi.repository import GLib
+
 
 class BotController:
     MEETING_TYPE_ZOOM = "zoom"
@@ -400,7 +404,7 @@ class BotController:
     def save_individual_audio_utterance(self, message):
         from bots.tasks.process_utterance_task import process_utterance
 
-        print(f"Received message that new utterance was detected")
+        print("Received message that new utterance was detected")
 
         # Create participant record if it doesn't exist
         participant, _ = Participant.objects.get_or_create(

@@ -1,5 +1,6 @@
-from django import template
 import hashlib
+
+from django import template
 
 register = template.Library()
 

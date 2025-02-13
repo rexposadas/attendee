@@ -1,7 +1,11 @@
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    TimeoutException,
+)
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
+
 
 class UiException(Exception):
     def __init__(self, message, step, original_exception):
@@ -39,7 +43,7 @@ class GoogleMeetUIMethods:
     def find_element_by_selector(self, selector_type, selector):
         try:
             return self.driver.find_element(selector_type, selector)
-        except NoSuchElementException as e:
+        except NoSuchElementException:
             return None
 
     def look_for_blocked_element(self, step):
