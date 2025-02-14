@@ -271,7 +271,7 @@ class BotEvent(models.Model):
         new_state_str = BotStates(self.new_state).label
 
         # Base string with event type
-        base_str = f"{self.bot.object_id} - [" f"{BotEventTypes(self.event_type).label}"
+        base_str = f"{self.bot.object_id} - [{BotEventTypes(self.event_type).label}"
 
         # Add event sub type if it exists
         if self.event_sub_type is not None:
