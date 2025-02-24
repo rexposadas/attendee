@@ -1,8 +1,9 @@
 import json
-import os
 import logging
+import os
 
 import redis
+from django.core.exceptions import ValidationError
 from django.urls import reverse
 from drf_spectacular.utils import (
     OpenApiExample,
@@ -39,7 +40,6 @@ from .serializers import (
     TranscriptUtteranceSerializer,
 )
 from .tasks import run_bot
-from django.core.exceptions import ValidationError
 
 TokenHeaderParameter = [
     OpenApiParameter(
@@ -119,16 +119,19 @@ def send_sync_command(bot, command="sync"):
     message = {"command": command}
     redis_client.publish(channel, json.dumps(message))
 
+
 def launch_bot(bot):
     # If this instance is running in Kubernetes, use the Kubernetes pod creator
     # which spins up a new pod for the bot
     if os.getenv("LAUNCH_BOT_METHOD") == "kubernetes":
         from .bot_pod_creator import BotPodCreator
+
         bot_pod_creator = BotPodCreator()
         bot_pod_creator.create_bot_pod(bot_id=bot.id, bot_name=f"bot-pod-{bot.object_id}".lower().replace("_", "-"))
     else:
         # Default to launching bot via celery
         run_bot.delay(bot.id)
+
 
 class BotCreateView(APIView):
     authentication_classes = [ApiKeyAuthentication]
@@ -355,10 +358,8 @@ class OutputAudioView(APIView):
                 # Create or get existing MediaBlob
                 media_blob = MediaBlob.get_or_create_from_blob(project=request.auth.project, blob=audio_data, content_type=content_type)
             except Exception as e:
-                error_message_first_line = str(e).split('\n')[0]
-                logging.error(
-                    f"Error creating audio blob: {error_message_first_line} (content_type={content_type}, bot_id={object_id})"
-                )
+                error_message_first_line = str(e).split("\n")[0]
+                logging.error(f"Error creating audio blob: {error_message_first_line} (content_type={content_type}, bot_id={object_id})")
                 return Response({"error": f"Error creating the audio blob. Are you sure it's a valid {content_type} file?", "raw_error": error_message_first_line}, status=status.HTTP_400_BAD_REQUEST)
 
             # Create BotMediaRequest
@@ -457,10 +458,8 @@ class OutputImageView(APIView):
                 # Create or get existing MediaBlob
                 media_blob = MediaBlob.get_or_create_from_blob(project=request.auth.project, blob=image_data, content_type=content_type)
             except Exception as e:
-                error_message_first_line = str(e).split('\n')[0]
-                logging.error(
-                    f"Error creating image blob: {error_message_first_line} (content_type={content_type}, bot_id={object_id})"
-                )
+                error_message_first_line = str(e).split("\n")[0]
+                logging.error(f"Error creating image blob: {error_message_first_line} (content_type={content_type}, bot_id={object_id})")
                 return Response({"error": f"Error creating the image blob. Are you sure it's a valid {content_type} file?", "debug_message": error_message_first_line}, status=status.HTTP_400_BAD_REQUEST)
 
             # Create BotMediaRequest

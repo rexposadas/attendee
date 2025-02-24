@@ -1,7 +1,7 @@
 [tool.ruff]
 # Enable pycodestyle (`E`), Pyflakes (`F`), and import sorting (`I`)
 select = ["E", "F", "I"]
-ignore = ["E501", "E722", "E402"]
+ignore = ["E501", "E722", "E402", "F403"]
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["A", "B", "C", "D", "E", "F", "I"]

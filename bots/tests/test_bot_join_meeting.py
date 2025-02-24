@@ -5,12 +5,13 @@ import threading
 import time
 from unittest.mock import MagicMock, call, patch
 
+import zoom_meeting_sdk as zoom
 from django.db import connection
 from django.test.testcases import TransactionTestCase
 
 from bots.bot_controller import BotController
-from bots.bot_controller.pipeline_configuration import PipelineConfiguration
 from bots.bot_controller.automatic_leave_configuration import AutomaticLeaveConfiguration
+from bots.bot_controller.pipeline_configuration import PipelineConfiguration
 from bots.bot_controller.streaming_uploader import StreamingUploader
 from bots.bots_api_views import send_sync_command
 from bots.models import (
@@ -34,7 +35,7 @@ from bots.models import (
     TranscriptionTypes,
 )
 from bots.utils import mp3_to_pcm, png_to_yuv420_frame
-import zoom_meeting_sdk as zoom
+
 
 def create_mock_streaming_uploader():
     mock_streaming_uploader = MagicMock(spec=StreamingUploader)
@@ -431,9 +432,7 @@ class TestBotJoinMeeting(TransactionTestCase):
 
         # Create bot controller with a very short wait time
         controller = BotController(self.bot.id)
-        controller.automatic_leave_configuration = AutomaticLeaveConfiguration(
-            wait_for_host_to_start_meeting_timeout_seconds=2
-        )
+        controller.automatic_leave_configuration = AutomaticLeaveConfiguration(wait_for_host_to_start_meeting_timeout_seconds=2)
 
         # Run the bot in a separate thread since it has an event loop
         bot_thread = threading.Thread(target=controller.run)
@@ -1296,10 +1295,8 @@ class TestBotJoinMeeting(TransactionTestCase):
 
         # Create bot controller
         controller = BotController(self.bot.id)
-        controller.automatic_leave_configuration = AutomaticLeaveConfiguration(
-            wait_for_host_to_start_meeting_timeout_seconds=1
-        )
-        
+        controller.automatic_leave_configuration = AutomaticLeaveConfiguration(wait_for_host_to_start_meeting_timeout_seconds=1)
+
         # Run the bot in a separate thread since it has an event loop
         bot_thread = threading.Thread(target=controller.run)
         bot_thread.daemon = True
@@ -1841,10 +1838,7 @@ class TestBotJoinMeeting(TransactionTestCase):
 
             # Simulate user requesting bot to leave
             BotEventManager.create_event(bot=self.bot, event_type=BotEventTypes.LEAVE_REQUESTED, event_sub_type=BotEventSubTypes.LEAVE_REQUESTED_USER_REQUESTED)
-            controller.handle_redis_message({
-                "type": "message",
-                "data": json.dumps({"command": "sync"}).encode("utf-8")
-            })
+            controller.handle_redis_message({"type": "message", "data": json.dumps({"command": "sync"}).encode("utf-8")})
 
             # Update GetMeetingStatus to return ended status when meeting ends
             adapter.meeting_service.GetMeetingStatus.return_value = mock_zoom_sdk_adapter.MEETING_STATUS_ENDED
