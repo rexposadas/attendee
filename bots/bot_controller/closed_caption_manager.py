@@ -1,11 +1,11 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Dict, Optional
 
 
 class CaptionEntry:
     def __init__(self, caption_data: dict):
         self.caption_data = caption_data
-        self.created_at = datetime.utcnow()
+        self.created_at = datetime.now(timezone.utc)
         self.modified_at = self.created_at
         self.last_upsert_to_db_at: Optional[datetime] = None
 
