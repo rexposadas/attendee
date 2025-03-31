@@ -1,9 +1,8 @@
 <div align="center">
 <img src="https://attendee.dev/assets/img/logo.svg" width="250">
 </div>
-<h1 align="center">Meeting bots made easy</h1>
+<h2 align="center">Meeting bots made easy</h2>
 <p align="center">
-  <br/>
     <a href="https://docs.attendee.dev/">Documentation</a>
     ·
     <a href="https://attendee.dev/">Website</a>
