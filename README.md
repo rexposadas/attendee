@@ -1,5 +1,5 @@
 <div align="center">
-<img src="static/images/logo_black_white.svg" width="250" alt="Attendee Logo">
+<img src="static/images/logo_black_white.svg" width="300" alt="Attendee Logo">
 </div>
 <h2 align="center">Meeting bots made easy</h2>
 <p align="center">
