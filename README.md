@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://attendee.dev/assets/img/logo.svg" width="250">
+<img src="static/images/logo_black_white.svg" width="250" alt="Attendee Logo">
 </div>
 <h2 align="center">Meeting bots made easy</h2>
 <p align="center">
